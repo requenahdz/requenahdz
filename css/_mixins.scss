@@ -1,0 +1,316 @@
+
+/* Saltos responsivos */
+@mixin saltoGrande {
+  @media only screen and (max-width: 1024px){ @content; }
+}
+@mixin saltoMediano {
+  @media only screen and (max-width: 768px){ @content; }
+}
+@mixin saltoChico {
+  @media only screen and (max-width: 480px){ @content; }
+}
+@mixin saltaMontes {
+  @media only screen and (max-width: 386px){ @content; }
+}
+/* Saltos responsivos */
+
+/*FLEXBOX*/
+//Mixin para contenedores
+@mixin flex ($direccion: row, $wrap: nowrap, $alignItems: stretch, $justifyContent: flex-start, $alignContent: stretch){
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  flex-direction: $direccion;
+  -webkit-flex-direction: $direccion;
+  -ms-flex-direction: $direccion;
+  -moz-box-direction: normal;
+  -webkit-box-direction: normal;
+
+  @if $direccion == "row"{
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+  } @else if $direccion == "column"{
+    -webkit-box-orient: vertical;
+    -moz-box-orient: vertical;
+  }
+
+  -ms-flex-wrap: $wrap;
+  -webkit-box-lines: $wrap;
+  -moz-box-lines: $wrap;
+  -webkit-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+
+  align-items: $alignItems;
+  @if $alignItems == 'stretch'{
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -moz-box-align: stretch;
+    -ms-flex-align: stretch;
+  }@else if $alignItems == 'baseline'{
+    -webkit-box-align: baseline;
+    -webkit-align-items: baseline;
+    -moz-box-align: baseline;
+    -ms-flex-align: baseline;
+  }@else if $alignItems == 'flex-start'{
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+  }@else if $alignItems == 'flex-end'{
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+  }@else if $alignItems == 'center'{
+    -webkit-box-align:center;
+    -webkit-align-items: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+  }
+
+  justify-content: $justifyContent;
+  @if $justifyContent == 'space-around'{
+    -webkit-justify-content: space-around;
+    -webkit-box-pack: distribute;
+    -ms-flex-pack: distribute;
+    -moz-box-pack: distribute;
+  }@else if $justifyContent == 'space-between'{
+    -webkit-justify-content: space-between;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -moz-box-pack: justify;
+  }@else if $justifyContent == 'flex-start'{
+    -webkit-justify-content: flex-start;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    -moz-box-pack: start;
+  }@else if $justifyContent == 'flex-end'{
+    -webkit-justify-content: flex-end;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    -moz-box-pack: end;
+  }@else if $justifyContent == 'center'{
+    -webkit-justify-content: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -moz-box-pack: center;
+  }
+
+  align-content: $alignContent;
+  @if $alignContent == 'space-around'{
+    -ms-flex-line-pack: distribute;
+    -webkit-align-content: distribute;
+  }@else if $alignContent == 'space-between'{
+    -ms-flex-line-pack:justify;
+    -webkit-align-content: justify;
+  }@else if $alignContent == 'flex-start'{
+    -ms-flex-line-pack: start;
+    -webkit-align-content: start;
+  }@else if $alignContent == 'flex-end'{
+    -ms-flex-line-pack: end;
+    -webkit-align-content: end;
+  }@else if $alignContent == 'center'{
+    -ms-flex-line-pack: center;
+    -webkit-align-content: center;
+  }
+}
+
+//Mixin para elementos flex
+@mixin flexItem ($order: 0, $grow: 0, $shrink: 1, $basis: auto, $self: auto){
+  order: $order;
+  -webkit-order: $order;
+  -ms-flex-order: $order;
+  @if $order == 0{
+    -moz-box-ordinal-group: 1;
+    -webkit-box-ordinal-group: 1;
+  }
+  flex-grow: $grow;
+  -webkit-box-flex: $grow;
+  -ms-flex-positive: $grow;
+
+  flex-shrink: $shrink;
+  -ms-flex-negative: $shrink;
+  -webkit-flex-shrink: $shrink;
+
+  flex-basis: $basis;
+  -ms-flex-preferred-size: $basis;
+  -webkit-flex-basis: $basis;
+
+  align-self: $self;
+  -webkit-align-self: $self;
+  -ms-flex-item-align: $self;
+}
+
+/*
+  Agregar estilos para fondo de imagen
+  Params:
+  - URL
+  - Tamaño
+  - Posición
+  - Repeat
+*/
+@mixin imagen ($image, $size: contain, $position: center, $repeat: no-repeat) {
+  background-image: url($image);
+  background-size: $size;
+  background-position: $position;
+  background-repeat: $repeat;
+}
+
+/*Agrega caracteristicas para el selector :before*/
+@mixin beforeAbsoluto() {
+  content: "";
+  position: absolute;
+}
+
+/*Indica el tamaño de un elemento, bloque, etc.*/
+@mixin size($width, $heigth){
+  width: $width;
+  height: $heigth;
+}
+
+/*Mixin para agregar efecto parallax*/
+@mixin parallax{
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/*Mixin para realizar animaciones personalizadas */
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+/*
+  Este mixin agrega las propiedades:
+    - Retraso
+    - Duración
+    - Nombre de la animación
+    - Dirección
+    - Fillmode
+    - Animación
+    - Iteración
+    - Play state
+*/
+@mixin animation ($delay, $duration, $name, $direction, $fillmode, $animation, $iteration, $playstate) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $name;
+    -webkit-animation-fill-mode: $fillmode;
+    -webkit-animation-direction: $direction;
+    -webkit-animation-timing-function: $animation;
+    -webkit-animation-iteration-count: $iteration;
+    -webkit-animation-play-state: $playstate;
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $name;
+    -moz-animation-fill-mode: $fillmode;
+    -moz-animation-direction: $direction;
+    -moz-animation-timing-function: $animation;
+    -moz-animation-iteration-count: $iteration;
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $name;
+    animation-fill-mode: $fillmode;
+    animation-direction: $direction;
+    animation-timing-function: $animation;
+    animation-iteration-count: $iteration;
+    animation-play-state: $playstate;
+}
+
+/*Mixin para personalizar la posición de un elemento */
+@mixin posicion ($posicion, $y: top, $valorY: initial, $x: left, $valorX: initial, $width: initial, $heigth: initial){
+  position: $posicion;
+  #{$y}: $valorY;
+  #{$x}: $valorX;
+  width: $width;
+  height: $heigth;
+}
+
+/* Agrega estilos a los placeholders de inputs */
+@mixin placeholder {
+  &::-webkit-input-placeholder{
+    @content;
+  }
+  &::-moz-placeholder { /* Firefox 19+ */
+    @content;
+  }
+  &:-ms-input-placeholder { /* IE 10+ */
+    @content;
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    @content;
+  }
+}
+
+/* Agrega el ellipsis (...) para cortar textos en caso de ser necesario */
+@mixin ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/*Añade los prefijos de filtros para su funcionalidad en todos los navegadores */
+@mixin filter($filter-type,$filter-amount) {
+  -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
+  -moz-filter: $filter-type+unquote('(#{$filter-amount})');
+  -ms-filter: $filter-type+unquote('(#{$filter-amount})');
+  -o-filter: $filter-type+unquote('(#{$filter-amount})');
+  filter: $filter-type+unquote('(#{$filter-amount})');
+}
+
+/*Incluye los prefijos de las transiciones para su funcionalidad en todos los navegadores */
+@mixin transition($transition-type, $transition-amount) {
+  -webkit-transition: $transition-type $transition-amount;
+  -moz-transition: $transition-type $transition-amount;
+  -ms-transition: $transition-type $transition-amount;
+  -o-transition: $transition-type $transition-amount;
+  transition: $transition-type $transition-amount;
+}
+
+/*Aplica los prefijos de los navegadores predeterminados para la propiedad transform*/
+@mixin transform($transition-typeandamount) {
+  -webkit-transform: $transition-typeandamount;
+  -moz-transform: $transition-typeandamount;
+  -ms-transform: $transition-typeandamount;
+  -o-transform: $transition-typeandamount;
+  transform: $transition-typeandamount;
+}
+
+/*Agrega la propiedad border-radius a los elementos con los prefijos necesarios*/
+@mixin borderRadius($amount) {
+  -webkit-border-radius: $amount;
+  -moz-border-radius: $amount;
+  border-radius: $amount;
+}
+/*Agrega la propiedad box-shadow a los elementos con los prefijos necesarios*/
+@mixin boxShadow($amount) {
+  -webkit-box-shadow: $amount;
+  box-shadow: $amount;
+}
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white, 50%)) {
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+  }
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+}
