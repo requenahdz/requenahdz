@@ -120,6 +120,7 @@ a{
     &.activo{
       @include saltoMediano{
         .container{
+          background: red;
           nav{
             height: 500px;
             opacity: 1;
