@@ -157,7 +157,10 @@ body{
 
 
     }
-    @include compu(){
+
+  }
+  @include compu(){
+    .container{
       width: 80%;
       .header{
         display: flex;
@@ -179,14 +182,18 @@ body{
           flex-direction: column;
           justify-content: center;
           .content-description{
-              margin: 20px 20px;
-              text-align: center;
+            margin: 20px 20px;
+            text-align: center;
           }
         }
       }
     }
   }
-
+  @include cel(){
+    .container{
+      width: 95%;
+    }
+  }
 }
 
 .education{
@@ -257,7 +264,7 @@ body{
             }
             ul{
               padding-left: 30px;
-                  padding-top: 5px;
+              padding-top: 5px;
             }
           }
         }
@@ -333,8 +340,8 @@ body{
           }
         }
         &:after{
-              left: 0px;
-              margin: 0px;
+          left: 0px;
+          margin: 0px;
         }
       }
     }
