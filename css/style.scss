@@ -331,14 +331,17 @@ body{
             left: -12% !important;
             right: inherit;
           }
-
-
         }
         &:after{
               left: 0px;
               margin: 0px;
         }
       }
+    }
+  }
+  @include cel(){
+    .container{
+      width: 95%;
     }
   }
 }
