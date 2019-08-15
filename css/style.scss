@@ -146,8 +146,8 @@ body{
                 padding-bottom: 3px;
               }
               .description{
+                word-break: break-word;
                 a{
-                      word-break: break-word;
                   color:$primario;
                 }
               }
