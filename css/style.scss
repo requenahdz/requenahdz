@@ -1,4 +1,25 @@
 $primario:#11b57c;
+//Mixins Media Queries
+@mixin compu{
+  @media only screen and (max-width: 1024px) {
+    @content;
+  }
+}
+@mixin tablet{
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin cel{
+  @media only screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin responsivo($medida){
+  @media only screen and (max-width: $medida) {
+    @content;
+  }
+}
 *{
   margin: 0;
   padding: 0;
@@ -44,6 +65,9 @@ body{
         }
       }
       .social{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
         a{
           width: 30px;
           height: 30px;
@@ -51,7 +75,6 @@ body{
           color: #fff;
           display: block;
           position: relative;
-          display: inline-block;
           border: solid 2px #fff;
           margin: 5px;
           i{
@@ -68,7 +91,7 @@ body{
       }
     }
     .box-info{
-      height: 120px;//fondo
+      height: 150px;//fondo
       .box-content{
         @extend %sombra;
         width: 100%;
@@ -83,6 +106,7 @@ body{
         .content-img{
           margin: 20px;
           .img{
+            margin: 0 auto;
             height: 250px;
             width: 250px;
             background-size: contain;
@@ -116,13 +140,15 @@ body{
             flex-wrap: wrap;
             .item{
               width: 50%;
-              padding-bottom: 10px;
+              padding-bottom: 20px;
               .title{
                 font-weight: 600;
                 padding-bottom: 3px;
               }
               .description{
-
+                a{
+                  color:$primario;
+                }
               }
             }
           }
@@ -131,10 +157,38 @@ body{
 
 
     }
+    @include compu(){
+      width: 80%;
+      .header{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .name{
+          a{
+            text-align: center;
+          }
+        }
+        .social{
+          margin-top: 5px;
+        }
+      }
+      .box-info{
+        height: auto;
+        .box-content{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .content-description{
+              margin: 20px 20px;
+              text-align: center;
+          }
+        }
+      }
+    }
   }
 
-
 }
+
 .education{
   padding: 20px 0px;
   margin: 130px 0px;
@@ -252,5 +306,39 @@ body{
       }
     }
 
+  }
+  @include compu(){
+    margin:  10px 0px;
+    .container{
+      width: 80%;
+      .info{
+        display: flex;
+        justify-content: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        .item{
+          width: 90%;
+          margin-top: 50px;
+          &:first-child{
+            margin-top: 0px!important;
+          }
+          &:before{
+            transform: rotate(45deg)!important;
+            left: -10px!important;
+            right: inherit;
+          }
+          &:after{
+            left: -12% !important;
+            right: inherit;
+          }
+
+
+        }
+        &:after{
+              left: 0px;
+              margin: 0px;
+        }
+      }
+    }
   }
 }
